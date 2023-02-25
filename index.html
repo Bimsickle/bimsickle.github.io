@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Angie Hollingworth</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="fas fa-book fa-2x"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Angie Hollingworth</h1>
+								<p>Data Analyst | Business Intelligence | CRM Developer<br />
+									"Data: because 'I have a feeling' is not a valid business strategy"</p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#about">About</a></li>
+								<li><a href="#work">Projects</a></li>
+								<li><a href="#resume">Resume</a></li>
+								<li><a href="#education">Education</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Intro -->
+							<article id="about">
+								<h2 class="major">About</h2>
+								<span class="image main"><img src="images/window.jpg" alt="" /></span>
+								<h4>Blockquote</h4>
+									<blockquote>Of all genres of books, Science Fiction is my favourite! I am an avid reader, and cannot put down a good book. How does the saying go; "the book is always better". 
+										Outside of my books, getting stuck into a good (coding) problem is time well spent. Any other free personal time I have is devoted to personal development, of which I am currently upskilling by persuing a Bachelors of Computer Science (Data Science major). Did I mention that I love data?
+									</blockquote>
+								<h4>Skills</h4>	
+								<h5>Technical</h5>
+								<ul>
+									<li>Python</li>
+									<li>T-SQL</li>
+									<li>C#</li>
+									<li>MS PBI (DAX)</li>
+									<li>MS Excel</li>
+									<li>HTML, CSS</li>
+									<li>SSMS</li>
+									<li>FDML/CDML</li>
+								</ul>
+								<h5>Reporting & Visualisation</h5>
+								<ul>
+									<li>Power BI</li>
+									<li>SSRS</li>
+									<li>Report Builder (SSRS & Power BI)</li>
+									<li>Excel</li>
+									<li>Python | Jupyter</li>
+								</ul>	
+								<h5>Key Skills</h5>	
+								<ul>
+									<li>Python scripting & automation</li>
+									<li>ETL Pipelines</li>
+									<li>CRM Development</li>
+									<li>Data Warehousing</li>
+									<li>Data Analytics</li>
+									<li>Data Visualisation</li>
+									<li>Advanced Excel Analytics</li>
+									<li>Operational Management</li>
+									<li>Project Leadership</li>
+									<li>APIs | (MS Graph SDK)</li>
+								</ul>									
+								<section>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Professional Memberships</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>ACS | Australian Computer Society</td>
+												</tr>
+												<tr>
+													<td>AISA | Australian Information Security Association</td>
+												</tr>
+												<tr>
+													<td>SSA | Statistical Society of Australia</td>
+												</tr>
+										</table>
+									</div>
+								</section>
+							</article>
+
+						<!-- Work -->
+							<article id="work">
+								<h2 class="major">Projects</h2>
+								<span class="image main"><img src="images/planning.jpg" alt="" /></span>
+								<blockquote>Getting lost in a good project is a given...</blockquote>
+								<h4>Enigma Machine | Python</h4>
+								<p>Whilst reading the book "The Code Book" by Simon Singh, I had the urge to try to code out my own version of an <a href="https://github.com/Bimsickle/Enigma_v2" target = "_blank">Enigma Machine</a>, albeit in Python.
+								<br/>The most challenging part of this project was to try and adhere to the "plug and rotator" design of the actual Enigam Machine, and also to reverse the algorithms to correctly deicpher the message. Exceptions were made in that only certain ASCII characters are allowed (they get swapped out if they are not on the list, the "machine" still works). 
+								<br/>This is an excellent project to tackle and I highly recommend trying it.</p>
+								<pre><code># Setting up the machine and viewing the settings 
+e = Enigma()
+e.set_machine()
+s = e.settings(True)
+em = e.encrypt(msg)
+print('\n', em[:200])
+
+print('----------')
+# #reset machine
+er = Enigma()
+er.set_machine([s[0], s[1], s[2]], [s[3], s[4], s[5]], s[6], s[7], s[8])
+er.settings(False)
+
+dm = e.decrypt(em)
+print(dm[:200])</code></pre>
+								<h4>Personal Expenses App | C# Razor Pages</h4>
+								<p>I am currently working on a <a href="https://github.com/Bimsickle/ExpensesApp" target="_blank">personal expenses app</a> which has the funtionality to calculate your tax rate (for Australia 2022/23) and uses a double accounting system for recodring transactions (expenses).
+								<br/>There are also stored procedures to get you up and running, as well as the project  being a full MVC using Razor Pages.</p>
+								<pre><code>namespace ExpensesAppLibrary.Data
+{
+	public class SqlData : ISqlData
+	{
+		private readonly ISqlDataAccess _db;
+		private const string connectionString = "Default";
+
+		public SqlData(ISqlDataAccess db)
+		{
+			_db = db;
+		}
+		/* DEBIT & COST ACCOUNT */
+		public DebitAccountModel getDebitAccount(int Id)
+		{
+			string sql = "[dbo].[spGetDebitAccount]";
+			return _db.LoadData<DebitAccountModel, dynamic>(sql, new { Id }, connectionString, true).FirstOrDefault();
+		}
+		public int CreateDebitAccount(string desc, DateTime openDate, decimal rate, decimal fee, int cycle, int increm, string? bank)
+		{
+			string sql = "[dbo].[spCreateDebitAccount]";
+			return _db.CreateData<DebitAccountModel, dynamic>(sql, new { desc, openDate, rate, fee, cycle, increm, bank }, connectionString, true);
+		}
+		//Truncated for brevity...</code></pre>
+								<hr/>
+								<h4>GCD | Python</h4>
+								<p>Lastly, and oldie but a goodie (all time favourite). I wrote this function for my alogorithms unit to calculate the GCD of two given numbers. The simplicity is deceptive in that it draws the eye away from the impressive time complexity (it is fast).</p>
+								<pre><code>def gcd(a,b):
+    '''Calculate the GCD of two given numbers'''
+    counter=0
+    while a%b>0:
+        counter+=1
+        a,b = b,a%b
+
+    return max(a,b)
+
+print(gcd(5912844,4301996))
+</code></pre>
+						<hr/>
+						<h4>To Note - Unpublished Projects (Private Repo's)</h4>
+						<ul>
+							<li>Python Jupyter | Completed (yet to be published) collaborative university project for the <a href="https://master-mop-busaytgm.ts.gateway.dev/" target="_blank">MOP (Melbourne Open Data Playground)</a> website for the City of Melbourne.</li>
+							<li>Python | Morse Decoder App for physically impared persons to fully utilise a computer with a 1-2 buttons.</li>
+							<li>C# | Social Networking App (for avid travellers to find each other).</li>
+							<li>FileMaker | CRM with full reporitng and KPI's. Supports 30+ staff.</li>
+						</ul>
+							</article>
+
+						<!-- Resume -->
+							<article id="resume">
+								<h2 class="major">Resume</h2>
+								<span class="image main"><img src="images/resume.jpg" alt="" /></span>
+								<hr />
+								<h4>Data Analyst</h4>
+								<blockquote>With 16+ years of professional experience, I specialise in supporting field teams' reporting needs using a range of tools such as dashboards, visualizations, and custom built CRM systems. 
+									<br/>My current role as a Data Analyst involves creating reporting pipelines and reports using T-SQL and Python for Power BI and Excel, as well as SSRS. 
+									<br/>I am proficient in Python and comfortable with C# development. Where recently, I have been converting my personal python projects into C# (Razor).
+									<br/><br/>Additionally, I have developed and implemented (as a solo project) a bispoque CRM system for a market leading Australian Pharmaceutical Company.</blockquote>
+							
+								<h5 >Reporting and Data Analyst | Insurance (Building)</h5>
+								<p>November 2021 - Current</p>
+								<h6>Key Responsibilities</h6>
+								<ul>
+									<li>Automate ETL processes.</li>
+									<li>Liaise with Business Stakeholders.</li>
+									<li>Create ad-hoc and business-critical reports.</li>
+									<li>Data manipulation for multiple reporting pipelines.</li>
+									<li>Creating Visualisations (Dashboards).</li>
+								</ul>
+								<h6>Key Achievements</h6>
+								<p>I improved the monthly financial reporting Python scripts by refactoring them, resulting in a significant reduction of the run time from over 5 hours to just 58 seconds.
+									<br/>(That is correct, less than 1/300th of the original runtime).</p>
+								<h6>Technologies</h6>
+								<ul>
+									<li>Python</li>
+									<li>T-SQL</li>
+									<li>Power BI & DAX</li>
+									<li>Excel</li>
+									<li>SSRS</li>
+									<li>SSMS</li>
+									<li>Microsoft API’s (Graph, Power BI)</li>
+								</ul>
+							<hr/>
+							<h5 >Developer, Data Analyst, Data Manager | Pharmaceuticals (Sales)</h5>
+								<p>2009 - 2021</p>
+								<h6>Key Responsibilities</h6>
+								<ul>
+									<li>Maintain (self-built) custom CRM.</li>
+									<li>Provide technical support for remote sales team.</li>
+									<li>Create and maintain multiple business insights & sales reports.</li>
+								</ul>
+								<h6>Key Achievements</h6>
+								<p>Created custom CRM system as a solo project effectively increasing staff efficiency from 30 minutes for daily logging to less than 10 minutes.</p>
+								<h6>Technologies</h6>
+								<ul>
+									<li>Python</li>
+									<li>SQL</li>
+									<li>Excel</li>
+									<li>FileMaker (FDML/ CDML)</li>
+								</ul>
+								<hr/>
+								<h5 >Volunteer Experience</h5>
+								<p>Product Manager | Sep- Nov 2021<br/>Propel Projects (Formerly CCA)</p>
+								<p>Team Leader / Back-End Developer | Mar - May 2021<br/>CCA | Chronic Coders Achademy</p>
+								<hr/>
+								<p>Please <a href="#contact">contact</a> me to request a copy of my full resume.</p>
+							</article>
+
+						<!-- Education -->
+							<article id="education">
+								<h2 class="major">Education</h2>
+								<span class="image main"><img src="images/books.jpg" alt="" /></span>
+								<section>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Degree</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Bachelor Computer Science<br/>Data Science Major</td>
+													<td>Deakin University <br/> (Transferred)</td>
+													<td>2022 - Current (2024)</td>
+												</tr>
+												<tr>
+													<td>Diploma of Network Engineering - Award<br/>(Transferred Bs Comp Sci)</td>
+													<td>Charles Darwin University</td>
+													<td>2019 - 2021<br/>86.2% GPA</td>
+												</tr>
+										</table>
+									</div>
+								</section>
+								<section>
+									<h4>Accolades</h4>
+									<ul>
+										<li>2022 | Honor Role Selection - School of IT</li>
+										<li>2020 | Academic Excellence - Best Overall: Algorithms & Complexity </li>
+										<li>2020 | Academic Excellence - Best Overall: Computing Fundamentals </li>
+										<li>2020 | Deans Recognition - Outstanding Academic Achievement (x3)</li>
+										<li>2019 | Deans Recognition - Outstanding Academic Achievement</li>
+									</ul>
+								</section>
+							</article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact</h2>
+								<span class="image main"><img src="images/banner_glasses.jpg" alt="" /></span>
+								<p>Please feel free to message & connect on LinkedIn.</p>
+								<hr />
+								<h4>Socials</h4>
+								<ul class="icons">
+									<li><a href="https://www.linkedin.com/in/a-hollingworth/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://github.com/Bimsickle" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Bimsickle 2023</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
