@@ -1,1 +1,1 @@
-# bimsickle.github.io
+# bimsickle.com personal website 
